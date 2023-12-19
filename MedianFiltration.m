@@ -27,5 +27,5 @@ end;
 close(h);
 G=uint8(G);
 printstring(['Median filtration time - '],[number2str(toc,7,2),' sec']);
-ShowImageBW3(G,'MF');
+ShowImageBW(G,'MF');
 end

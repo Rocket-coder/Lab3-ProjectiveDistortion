@@ -3,7 +3,7 @@
 %--------------------------------------------------------------          % the window size  
 L=12; WS=[0, L, 0, L];  % the window size  
 % IName='CamelsBBW.png';
-IName = 'My Rocket.jpg';
+IName='My Rocket.jpg';
 A=imread(IName); 
 ShowImageRGB(A,IName); 
 [h,w]=size(A);
@@ -16,8 +16,8 @@ sw=[m+h,m];   se=[m+h,m+w];  %
 [X,Y] = Corners2XY(nw,ne,sw,se,1); % X,Y - 2-vectors
 ShowCoordinates(X,Y,7,3,'Initial corners - X,Y: ');
 %----- Corners of distorted image -----------------------------
-nwt=nw+[0,0];  net=ne+[ 100,-150];
-swt=sw+[0,10]; set=se+[-200,150];
+nwt=nw+[0,0];  net=ne+[ 50,-100];
+swt=sw+[0,10]; set=se+[-50,-150];
 ht=2*m+max((swt(1)-nwt(1)),(set(1)-net(1)));
 wt=2*m+max((net(2)-nwt(2)),(set(2)-swt(2)));
 [XT,YT] = Corners2XY(nwt,net,swt,set,1); % X,Y - 2-vectors
@@ -32,5 +32,5 @@ hold on
 % Evaluation of the transform matrix on 
 % the base of coordinates of 4+4 points only
 T=ProjectiveTransform2(XT,YT,X,Y) 
-ShowMatrixHP2(T,'T',-10.0,-5.0);
+ShowMatrixHP2(T,'T',0.15,11.0);
 hold off

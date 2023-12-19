@@ -2,6 +2,7 @@
 % Projective distortion of an image
 %--------------------------------------------------------------------
 sz=[int2str(ht),'x',int2str(wt)];
+%IName='CamelsBBW.png';
 IName='My Rocket.jpg';
 Prompt='\color{blue}   - press any key to start transform';
 ShowImageBW(A,[IName,Prompt]); pause

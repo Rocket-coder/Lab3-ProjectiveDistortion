@@ -1,9 +1,13 @@
 % IMAGECORRECTION2;
 % Correction of a projectively distorted image
 %%----- Data for Correction -------------------------------------
-PDI=imread('DI2CamelsBBW.png');
-nwt=[ 50,50];   net=[100,910];
-swt=[590, 60];   set=[540,860];
+%PDI=imread('DI2CamelsBBW.png');
+%PDI=imread('DI2My Rocket.jpg');
+PDI=imread('Cher.jpg');
+% nwt=[50,50];   net=[8,680];
+% swt=[1000, 60];   set=[972,635];
+nwt=[10,30];   net=[60,725];
+swt=[535, 30];   set=[440,288];
 rwh=1.5; 
 %--------------------------------------------------------------------
 Name=['Distorted image of size ',vector2str(size(PDI),7,1)];
@@ -29,12 +33,12 @@ YT=sf*([nwt(2),net(2),set(2),swt(2)]-L);
 H=ProjectiveTransform2(X,Y,XT,YT) % H is the inverse transform matrix 
 %-------------------- Image correction ------------------------------
 tic;
-%A=ImageTransform2(PDI,H,K,sf);  Name='I2';
-A=ImageTransform1(PDI,H,K,sf);  Name='I1';
+A=ImageTransform2(PDI,H,K,sf);  Name='I2';
+%A=ImageTransform1(PDI,H,K,sf);  Name='I1';
 %A=ImageTransform(PDI,H,K,sf);   Name='I0';
 printstring([Name,' correction time - '],[number2str(toc,7,2),' sec']);
 Title=['Corrected by ',Name,' - ',CorSize];
-ShowImageBW(A,Title);
+ShowImageBW(A,Title); pause
 %-------------------- Median filtration -----------------------------
 W5=[[0,1,0];...
     [1,1,1];...
@@ -45,10 +49,10 @@ W9=[[1,1,1];...
     [1,1,1]];
 %
 %FA=MedianFiltration(A,W5); FName='W5';
-%FA=MedianFiltration(A,W9);  FName='W9';
-%ShowImageBW3(FA,['After median filtration by ',FName]);
+FA=MedianFiltration(A,W9);  FName='W9';
+ShowImageBW(FA,['After median filtration by ',FName]);
 %---------------------- Save image ----------------------------------
-%FileName=[Title,'.png'];
-%imwrite(A,FileName);
+FileName=[Title,'.png'];
+imwrite(FA,FileName);
 
 
